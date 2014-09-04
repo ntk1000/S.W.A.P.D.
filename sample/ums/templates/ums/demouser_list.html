@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}ユーザー一覧{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="page-header">ユーザー</h3>
+    <a href="{% url 'ums:demouser_add' %}" class="btn btn-default btn-sm">追加</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>名前</th>
+          <th>メール</th>
+          <th>URL</th>
+          <th>生年月日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in demousers %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.name }}</td>
+          <td>{{ d.email }}</td>
+          <td>{{ d.url }}</td>
+          <td>{{ d.birthdate }}</td>
+          <td>
+            <a href="{% url 'ums:demouser_mod' demouser_id=d.id %}" class="btn btn-default btn-sm">修正</a>
+            <a href="{% url 'ums:demouser_del' demouser_id=d.id %}" class="btn btn-default btn-sm">削除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}
