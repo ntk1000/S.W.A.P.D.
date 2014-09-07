@@ -8,7 +8,10 @@
     <p class="lead">登録内容を確認してください</p>
     <form action="{% url 'ums:demouser_commit' demouser_id=demouser_id %}" method="post" class="form-horizontal" role="form">
       {% csrf_token %}
-      {{ form|bootstrap_horizontal }}
+      {{ form.username|bootstrap_horizontal }}
+      {{ form.email|bootstrap_horizontal }}
+      {{ form.url|bootstrap_horizontal }}
+      {{ form.birth|bootstrap_horizontal }}
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-primary">修正</button>
