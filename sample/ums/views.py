@@ -6,37 +6,31 @@ from ums.forms import DemoUserForm
 from ums.models import DemoUser
 
 def demouser_edit(request):
-    demouser = DemoUser()
+	demouser = DemoUser()
 
-    form = DemoUserForm(request.POST, instance=demouser)
+	form = DemoUserForm(request.POST, instance=demouser)
 
-    if form.is_valid():
-        demouser = form.save(commit=False)
-        demouser.save()
-        return redirect('ums:demouser_commit',demouser.id)
+	if form.is_valid():
+		demouser = form.save(commit=True)
+		demouser.save()
+		return redirect('ums:demouser_commit',demouser.id)
 
-    return render_to_response('ums/demouser_edit.html',
-                              dict(form=form),
-                              context_instance=RequestContext(request))
+	return render_to_response('ums/demouser_edit.html',dict(form=form),context_instance=RequestContext(request))
 
 def demouser_commit(request, demouser_id):
-    demouser = get_object_or_404(DemoUser, pk=demouser_id)
+	demouser = get_object_or_404(DemoUser, pk=demouser_id)
 
-    if request.method == 'POST':
-        form = DemoUserForm(request.POST, instance=demouser)
-        if form.is_valid():
-            demouser = form.save(commit=False)
-            demouser.save()
-            return redirect('ums:demouser_fin',demouser.id)
-    else:
-        form = DemoUserForm(instance=demouser)
+	if request.method == 'POST':
+		form = DemoUserForm(request.POST, instance=demouser)
+		if form.is_valid():
+			demouser = form.save(commit=True)
+			demouser.save()
+			return redirect('ums:demouser_fin',demouser.id)
+	else:
+		form = DemoUserForm(instance=demouser)
 
-    return render_to_response('ums/demouser_commit.html',
-                              dict(form=form,demouser_id=demouser_id),
-                              context_instance=RequestContext(request))
+	return render_to_response('ums/demouser_commit.html',dict(form=form,demouser_id=demouser_id),context_instance=RequestContext(request))
 
 def demouser_fin(request, demouser_id):
-    demouser = get_object_or_404(DemoUser, pk=demouser_id)
-    return render_to_response('ums/demouser_fin.html',
-                              {'demouser': demouser},
-                              context_instance=RequestContext(request))
+	demouser = get_object_or_404(DemoUser, pk=demouser_id)
+	return render_to_response('ums/demouser_fin.html',{'demouser': demouser},context_instance=RequestContext(request))
