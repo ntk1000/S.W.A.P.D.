@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+
+{% block content %}
+    <h3 class="page-header">登録完了しました</h3>
+    <p class="lead">{{ demouser.username }}さん、ご登録ありがとうございました</p>
+      <div class="col-sm-offset-2 col-sm-10">
+        <a href="{% url 'ums:demouser_edit' %}" class="btn btn-default btn-sm">戻る</a>
+      </div>
+{% endblock content %}

@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 
-class DemoUser(models.Model):
+class DemoUser(AbstractUser):
 	"""DemoUser Model Class."""
-	name = models.CharField(u'名前',max_length=50)
-	email = models.EmailField(u'メールアドレス')
-	passw = models.CharField(u'パスワード',max_length=50)
-	url = models.URLField(u'URL',null=True)
-	birthdate = models.DateField(u'生年月',null=True)
+	url = models.URLField(u'URL',blank=True,null=True)
+	birthyear = models.PositiveSmallIntegerField(u'生年',blank=True,null=True,max_length=4)
+	birthmonth = models.PositiveSmallIntegerField(u'月',blank=True,null=True,max_length=2)
+
+	USERNAME_FIELD = 'username'
+	REQUIRED_FIELDS = ['email', 'password']
 	
 	def __unicode__(self):
-		return self.name
+		return self.username
+
+	class Meta:
+		db_table = 'user'
+		swappable = 'AUTH_USER_MODEL'

@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% load bootstrap %}
 
-{% block title %}編集{% endblock title %}
+{% block title %}ご登録{% endblock title %}
 
 {% block content %}
-    <h3 class="page-header">編集</h3>
-    {% if demouser_id %}
-    <form action="{% url 'ums:demouser_mod' demouser_id=demouser_id %}" method="post" class="form-horizontal" role="form">
-    {% else %}
-    <form action="{% url 'ums:demouser_add' %}" method="post" class="form-horizontal" role="form">
-    {% endif %}
+    <h3 class="page-header">ご登録</h3>
+    <p class="lead">入力後、登録ボタンを押してください</p>
+    <form action="{% url 'ums:demouser_edit' %}" method="post" class="form-horizontal" role="form">
       {% csrf_token %}
       {{ form|bootstrap_horizontal }}
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary">送信</button>
+          <button type="submit" class="btn btn-primary">登録</button>
         </div>
       </div>
     </form>
-    <a href="{% url 'ums:demouser_list' %}" class="btn btn-default btn-sm">戻る</a>
 {% endblock content %}
