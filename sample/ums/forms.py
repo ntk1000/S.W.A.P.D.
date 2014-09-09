@@ -11,7 +11,7 @@ class DemoUserForm(forms.ModelForm):
 	email_len=75
 	password_len=128
 
-	username = forms.CharField(label=u'お名前',help_text=help_base.format(username_len),max_length=username_len)
+	userfullname = forms.CharField(label=u'お名前',help_text=help_base.format(username_len),max_length=username_len)
 	email = forms.EmailField(label=u'メールアドレス',help_text=u'有効なメールアドレスを'+help_base.format(email_len),max_length=email_len)
 	password = forms.CharField(label=u'パスワード',help_text=help_base.format(password_len),widget=forms.PasswordInput(),max_length=password_len)
 	password2 = forms.CharField(label=u'パスワード(再)',widget=forms.PasswordInput(),max_length=password_len)
@@ -22,7 +22,7 @@ class DemoUserForm(forms.ModelForm):
 
 	class Meta:
 		model = DemoUser
-		fields = ('username','email','password','password2','url','birth')
+		fields = ('userfullname','email','password','password2','url','birth')
 
 	def clean_password2(self):
 		password = self.cleaned_data.get('password')

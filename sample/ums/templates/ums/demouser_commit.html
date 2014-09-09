@@ -8,7 +8,7 @@
     <p class="lead">登録内容を確認してください</p>
     <form action="{% url 'ums:demouser_commit' demouser_id=demouser_id %}" method="post" class="form-horizontal" role="form">
       {% csrf_token %}
-      {{ form.username|bootstrap_horizontal }}
+      {{ form.userfullname|bootstrap_horizontal }}
       {{ form.email|bootstrap_horizontal }}
       {{ form.url|bootstrap_horizontal }}
       {{ form.birth|bootstrap_horizontal }}
